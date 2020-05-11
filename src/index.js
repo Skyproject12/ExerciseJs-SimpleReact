@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './serviceWorker'; 
+import HelloWorld from './component/HelloWorld'; 
+import StatefullHello from './container/StatefullHello';
 
+// melakukan render compoennt 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <HelloWorld/>,
   document.getElementById('root')
 );
 
