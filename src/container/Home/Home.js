@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Youtube from '../../component/Youtube/Youtube'; 
+import Product from '../Product/Product'; 
 import './Home.css';
 
 class Home extends Component {
@@ -8,7 +9,7 @@ class Home extends Component {
             <div>
                 <p className="title_home">Youtube Bola </p> 
                 <p className="desc_home">make all component in here</p> 
-                <hr/>
+               
                 <Youtube 
                     time="07.12" 
                     title="Chelsea" 
@@ -32,7 +33,11 @@ class Home extends Component {
                 <Youtube 
                     title="Bayern Munchen" 
                     desc="club liga Jerman terbaik dan terpopuler" 
-                    image="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/270px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png"/>
+                    image="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/270px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png"/> 
+                <p className="title_home">Counter</p>
+                <p className="desc_home">Count of your order</p>
+                <hr/> 
+                <Product/>
             </div>
         )
     }
