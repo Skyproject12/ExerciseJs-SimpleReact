@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import Youtube from '../../component/Youtube/Youtube'; 
-import Product from '../Product/Product'; 
+// import Youtube from '../../component/Youtube/Youtube'; 
+// import Product from '../Product/Product'; 
 import './Home.css';
+import LifeCycle from '../LifeCrycle/LifeCycle';
 
 class Home extends Component {
     render() {
         return (
             <div>
-                <p className="title_home">Youtube Bola </p> 
+                {/* <p className="title_home">Youtube Bola </p> 
                 <p className="desc_home">make all component in here</p> 
                
                 <Youtube 
@@ -37,7 +38,10 @@ class Home extends Component {
                 <p className="title_home">Counter</p>
                 <p className="desc_home">Count of your order</p>
                 <hr/> 
-                <Product/>
+                <Product/> */} 
+                <p className="title_home">LifeCycle</p> 
+                <hr/> 
+                <LifeCycle/>
             </div>
         )
     }
