@@ -14,6 +14,9 @@ import './LifeCycle.css';
 // 4. getSnapshotBeforeUpdate  
 // 5. componentDidUpdate
 
+// ketika component di cabut 
+// 1. componentWillMount
+
 class LifeCycle extends Component { 
 
     constructor(props){ 
@@ -34,17 +37,26 @@ class LifeCycle extends Component {
     // update state tersebut 
     componentDidMount(){ 
         console.log('didmount');  
-        setTimeout(()=>{ 
-            this.setState({ 
-                count:2
-            })
-        }, 3000);
+        // setTimeout(()=>{ 
+        //     this.setState({ 
+        //         count:2
+        //     })
+        // }, 5000);
     }
 
     // lakukan return true untuk mengupdate  
     // disini tempat memastikan apakah state harus di update 
-    shouldComponentUpdate(nextProps, nextState){ 
-        console.log('should update'); 
+    shouldComponentUpdate(nextProps, nextState){  
+        console.group('sholdComponentUpdate');  
+        // menangkap hasil state selanjutnya
+        console.log('nextState', nextState);  
+        // nenangkap state yang sekarang dan belum di update 
+        console.log('this state', this.state); 
+        console.groupEnd();
+        // jika state selanjutnya memiliki nilai 4 maka jangan melakukan update  
+        if(nextState.count >= 4){ 
+            return false;
+        }
         return true; 
     }
 
@@ -53,16 +65,25 @@ class LifeCycle extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot){ 
-        console.log('did update');
+        console.log('did update'); 
+        return null;
     }
     componentWillMount(){ 
         console.log('will mount');
     }
 
+    // melakukan perubahan tersebut 
+    changeCount = () => { 
+        this.setState({ 
+            count: this.state.count +1 
+        })
+    }
+
     render(){ 
         console.log('render');
         return ( 
-        <button className="btn">Compoennt Button {this.state.count}</button>
+            // melakukan perubahan ketika di klik 
+        <button className="btn" onClick={this.changeCount}>Compoennt Button {this.state.count}</button>
         )
     }
 }

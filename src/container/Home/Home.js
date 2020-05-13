@@ -4,7 +4,20 @@ import React, { Component } from 'react';
 import './Home.css';
 import LifeCycle from '../LifeCrycle/LifeCycle';
 
-class Home extends Component {
+class Home extends Component { 
+    state = { 
+        showComponent: true
+    } 
+
+    // melakuakan destroy data setelah 15 detik 
+    componentDidMount(){ 
+        // setTimeout(()=>{ 
+        //     this.setState({ 
+        //         showComponent: false
+        //     })
+        // },15000); 
+        return true;
+    }
     render() {
         return (
             <div>
@@ -40,8 +53,11 @@ class Home extends Component {
                 <hr/> 
                 <Product/> */} 
                 <p className="title_home">LifeCycle</p> 
-                <hr/> 
-                <LifeCycle/>
+                <hr/>  
+                {this.state.showComponent ?
+                     <LifeCycle/> : null
+                }
+               
             </div>
         )
     }
