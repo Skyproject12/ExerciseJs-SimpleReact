@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import '../../container/BlogPost/BlogPost.css'; 
 
-
 const Post = (props) => {
     return (
         <Fragment>
@@ -10,9 +9,10 @@ const Post = (props) => {
                     <img src="http://placeimg.com/200/150/tech" />
                 </div>
                 <div className="content">
-                    <p className="title">{props.title}</p>
-                    <p className="desc">{props.desc}</p>
-                </div>
+                    <p className="title">{props.data.title}</p>
+                    <p className="desc">{props.data.body}</p> 
+                </div> 
+                   <button className="remove" onClick={console.log("klik")}>Remove</button>
             </div>
         </Fragment>
     );

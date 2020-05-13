@@ -7,6 +7,18 @@ class BlogPost extends Component {
     state = {
         post: []
     }
+
+     // melakukan get api 
+     getPostApi = () =>{ 
+        axios.get('http://localhost:3004/posts')
+            .then((res) => {
+                this.setState({
+                    post: res.data
+                })
+            })
+    }
+
+    // menjalankan get api  
     componentDidMount() {
         // fetch('https://jsonplaceholder.typicode.com/posts')
         //     .then(response => response.json())
@@ -15,13 +27,17 @@ class BlogPost extends Component {
         //             post: Json
         //         })
         //     }) 
-        // melakukan fetch dengan axios 
-        axios.get('https://jsonplaceholder.typicode.com/posts')
-            .then((res) => {
-                this.setState({
-                    post: res.data
-                })
-            })
+        // melakukan fetch dengan axios  
+        this.getPostApi();
+    }
+
+    // melakukan remove handle 
+    handleRemove = (data) => { 
+        // axios.delete(`http://localhost:3004/posts/${data}`).then((res)=> { 
+        //     console.log(res); 
+        //     this.getPostApi();
+        // })  
+        console.log(data);
     }
 
     render() {
@@ -29,8 +45,9 @@ class BlogPost extends Component {
             <Fragment>
                 <p className="section-title">Blog Post</p>
                 {/* map berfungsi menggulang data sebanyak jumlah data lalu mereturn object post  */}
-                {this.state.post.map(post => {
-                    return <Post key={post.id} title={post.title} desc={post.body} />
+                {this.state.post.map(post => { 
+                    // menampung id berserta remove ketika di kirim props  
+                    return <Post key={post.id} data={post} remove={(idRemove)=>this.handleRemove(idRemove)}/>
                 })}
             </Fragment>
         );

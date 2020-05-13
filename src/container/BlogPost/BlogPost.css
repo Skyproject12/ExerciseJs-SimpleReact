@@ -52,3 +52,16 @@ p.desc {
     margin-top: 6px; 
     color: #4e4d4d;
 }
+
+.remove { 
+    padding: 12px 18px; 
+    background: red; 
+    color: white; 
+    border-radius: 4px; 
+    outline: none; 
+    margin-top: 10px;
+}
+
+.remove:hover{ 
+    cursor: pointer;
+}
