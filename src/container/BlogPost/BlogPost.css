@@ -55,14 +55,23 @@ p.desc {
 
 .remove { 
     padding: 12px 18px; 
-    background: red; 
+    background: #2196F3; 
     color: white; 
     border-radius: 4px; 
     outline: none; 
     margin-top: 10px;
 }
+button.update { 
+    padding: 12px 18px; 
+    background: #88C34A; 
+    color: white; 
+    border-radius: 4px; 
+    outline: none; 
+    margin-top: 10px;
+    margin-right: 10px;
+} 
 
-.remove:hover{ 
+.remove:hover, .update:hover{ 
     cursor: pointer;
 }
 
