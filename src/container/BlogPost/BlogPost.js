@@ -4,18 +4,48 @@ import Post from '../../component/Post/Post';
 import axios from 'axios';
 
 class BlogPost extends Component {
+    
     state = {
-        post: []
+        post: [], 
+         // formBlogPost berfungsi untuk menampungd data form  
+        formBlogPost:{ 
+            id:1, 
+            title:'', 
+            body:'', 
+            userId:1
+        }
     }
 
      // melakukan get api 
      getPostApi = () =>{ 
-        axios.get('http://localhost:3004/posts')
+         // melakukan pengurutan data berdasarkan id secara terbalik  
+        axios.get('http://localhost:3004/posts?_sort=id&_order=desc')
             .then((res) => {
                 this.setState({
                     post: res.data
                 })
             })
+    }
+
+    // melakukan handle ketika form berubah  
+    // ketika telah melakukan onChange maka akan mendapatkan suatu event 
+    handleFormChange = (event) => { 
+        // melakukan copy data dari formBlogPost
+        let formBlogPostNew = {...this.state.formBlogPost}; 
+        // membuat time stimp untuk id dari pengguna 
+        let timestamp = new Date().getTime(); 
+        formBlogPostNew["id"]= timestamp; 
+        // melakukan perubahan hanya pada name dari suatu inputan   
+        // menampung value dari form input  
+        formBlogPostNew[event.target.name] = event.target.value;
+        this.setState({ 
+            formBlogPost: formBlogPostNew
+        })
+    }
+
+    // melakukan handle ketika submit
+    handleSubmit = () => { 
+        this.postDataToApi();
     }
 
     // menjalankan get api  
@@ -31,23 +61,39 @@ class BlogPost extends Component {
         this.getPostApi();
     }
 
+    // melakukan post ke api 
+    postDataToApi = () =>{ 
+        axios.post(`http://localhost:3004/posts/`, this.state.formBlogPost).then((result)=>{  
+            // ketika sudah berhasil melakukan insert maka render get api kembali 
+            this.getPostApi();
+        });
+    }
+
     // melakukan remove handle 
     handleRemove = (data) => { 
-        // axios.delete(`http://localhost:3004/posts/${data}`).then((res)=> { 
-        //     console.log(res); 
-        //     this.getPostApi();
-        // })  
-        console.log(data);
+        axios.delete(`http://localhost:3004/posts/${data}`).then((res)=> { 
+            this.getPostApi();
+        })   
     }
 
     render() {
         return (
             <Fragment>
-                <p className="section-title">Blog Post</p>
+                <p className="section-title">Blog Post</p> 
+                <div className="form-add-post"> 
+                    <label htmlFor="title">Title</label> 
+                    <input type="text" name="title" placeholder="add title" onChange={this.handleFormChange}/> 
+                    <label htmlFor="body" id="body" >Blog Content</label>  
+                    {/* onChange berfungsi melakukan perubahan ketika di bagian text area di ketikkan sesuatu  */} 
+                    {/* beri nama name sesuai dengan formBlogPost agar perubahan sesuai  */}
+                    <textarea name="body" id="body" color="30" rows="10" placeholder="add content" onChange={this.handleFormChange}></textarea> 
+                    <button className="btn-submit" onClick={this.handleSubmit}>Simpan</button>
+                </div>
                 {/* map berfungsi menggulang data sebanyak jumlah data lalu mereturn object post  */}
                 {this.state.post.map(post => { 
-                    // menampung id berserta remove ketika di kirim props  
-                    return <Post key={post.id} data={post} remove={(idRemove)=>this.handleRemove(idRemove)}/>
+                    // menampung id berserta remove ketika di kirim props   
+                    // menampung remove props untuk di jalankan di sini 
+                    return <Post key={post.id} data={post} remove={this.handleRemove}/>
                 })}
             </Fragment>
         );

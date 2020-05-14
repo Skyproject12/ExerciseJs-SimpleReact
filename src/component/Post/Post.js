@@ -12,7 +12,7 @@ const Post = (props) => {
                     <p className="title">{props.data.title}</p>
                     <p className="desc">{props.data.body}</p> 
                 </div> 
-                   <button className="remove" onClick={console.log("klik")}>Remove</button>
+                   <button className="remove" onClick={()=>props.remove(props.data.id)}>Remove</button>
             </div>
         </Fragment>
     );
