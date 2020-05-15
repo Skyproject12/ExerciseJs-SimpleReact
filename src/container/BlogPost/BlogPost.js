@@ -34,10 +34,10 @@ class BlogPost extends Component {
         // melakukan copy data dari formBlogPost
         let formBlogPostNew = { ...this.state.formBlogPost };
         // membuat time stimp untuk id dari pengguna 
-        let timestamp = new Date().getTime(); 
+        let timestamp = new Date().getTime();
         // jika melakukan update jangan inputkan id baru 
-        if(!this.state.isUpdate){ 
-            formBlogPostNew["id"] = timestamp; 
+        if (!this.state.isUpdate) {
+            formBlogPostNew["id"] = timestamp;
         }
         // melakukan perubahan hanya pada name dari suatu inputan   
         // menampung value dari form input  
@@ -74,9 +74,9 @@ class BlogPost extends Component {
     postDataToApi = () => {
         axios.post(`http://localhost:3004/posts/`, this.state.formBlogPost).then((result) => {
             // ketika sudah berhasil melakukan insert maka render get api kembali 
-            this.getPostApi();  
+            this.getPostApi();
             // menghapus form ketika sudah update 
-            this.setState({ 
+            this.setState({
                 formBlogPost: {
                     id: 1,
                     title: '',
@@ -94,14 +94,14 @@ class BlogPost extends Component {
         })
     }
 
-    putDataToApi =()=>{ 
+    putDataToApi = () => {
         axios.put(`http://localhost:3004/posts/${this.state.formBlogPost.id}`, this.state.formBlogPost).then((res) => {
             console.log(res);
-            this.getPostApi();  
+            this.getPostApi();
             // ketika sudah selesai mengupdate maka ubah status menjadi false 
             // lalu set form kembali kosong
-            this.setState({ 
-                isUpdate: false, 
+            this.setState({
+                isUpdate: false,
                 formBlogPost: {
                     id: 1,
                     title: '',
@@ -118,7 +118,7 @@ class BlogPost extends Component {
         // menampilkan di form data yang ingin kita update  
         // membuat status update true
         this.setState({
-            formBlogPost: data, 
+            formBlogPost: data,
             isUpdate: true
         });
     }
@@ -126,7 +126,9 @@ class BlogPost extends Component {
     render() {
         return (
             <Fragment>
-                <p className="section-title">Blog Post</p>
+                <p className="title_home">Blog Post</p>
+                <p className="desc_home">Blog Post</p>
+                <hr />
                 <div className="form-add-post">
                     <label htmlFor="title">Title</label>
                     <input type="text" value={this.state.formBlogPost.title} name="title" placeholder="add title" onChange={this.handleFormChange} />

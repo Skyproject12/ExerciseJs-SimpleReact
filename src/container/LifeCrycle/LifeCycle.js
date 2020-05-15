@@ -1,4 +1,4 @@
-import React, { Component } from 'react'; 
+import React, { Component, Fragment } from 'react';
 import './LifeCycle.css';
 
 // ketika pertama kali di load  
@@ -17,26 +17,26 @@ import './LifeCycle.css';
 // ketika component di cabut 
 // 1. componentWillMount
 
-class LifeCycle extends Component { 
+class LifeCycle extends Component {
 
-    constructor(props){ 
-        super(props); 
-        this.state ={ 
-            count:1
-        } 
+    constructor(props) {
+        super(props);
+        this.state = {
+            count: 1
+        }
         console.log('constructor');
     }
 
-    static getDerivedStateFromProps(props, state){ 
-        console.log('drived'); 
+    static getDerivedStateFromProps(props, state) {
+        console.log('drived');
         return null;
     }
 
     // melakukan update data sangat cocok dilakukan di didmount  
     // karena jika sudah muncul di browser 
     // update state tersebut 
-    componentDidMount(){ 
-        console.log('didmount');  
+    componentDidMount() {
+        console.log('didmount');
         // setTimeout(()=>{ 
         //     this.setState({ 
         //         count:2
@@ -46,44 +46,48 @@ class LifeCycle extends Component {
 
     // lakukan return true untuk mengupdate  
     // disini tempat memastikan apakah state harus di update 
-    shouldComponentUpdate(nextProps, nextState){  
-        console.group('sholdComponentUpdate');  
+    shouldComponentUpdate(nextProps, nextState) {
+        console.group('sholdComponentUpdate');
         // menangkap hasil state selanjutnya
-        console.log('nextState', nextState);  
+        console.log('nextState', nextState);
         // nenangkap state yang sekarang dan belum di update 
-        console.log('this state', this.state); 
+        console.log('this state', this.state);
         console.groupEnd();
         // jika state selanjutnya memiliki nilai 4 maka jangan melakukan update  
-        if(nextState.count >= 4){ 
+        if (nextState.count >= 4) {
             return false;
         }
-        return true; 
+        return true;
     }
 
-    getSnapshotBeforeUpdate(prevProps, prevState){ 
+    getSnapshotBeforeUpdate(prevProps, prevState) {
         console.log('before update');
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot){ 
-        console.log('did update'); 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('did update');
         return null;
     }
-    componentWillMount(){ 
+    componentWillMount() {
         console.log('will mount');
     }
 
     // melakukan perubahan tersebut 
-    changeCount = () => { 
-        this.setState({ 
-            count: this.state.count +1 
+    changeCount = () => {
+        this.setState({
+            count: this.state.count + 1
         })
     }
 
-    render(){ 
+    render() {
         console.log('render');
-        return ( 
-            // melakukan perubahan ketika di klik 
-        <button className="btn" onClick={this.changeCount}>Compoennt Button {this.state.count}</button>
+        return (
+            <Fragment>
+                <p className="title_home">LifeCycle</p>
+                <hr />
+                {/* melakukan perubahan ketika di klik  */}
+                <button className="btn" onClick={this.changeCount}>Compoennt Button {this.state.count}</button>
+            </Fragment>
         )
     }
 }
