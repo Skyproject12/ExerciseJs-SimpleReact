@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
-import Youtube from '../../component/Youtube/Youtube';
-import Product from '../Product/Product';
+import Product from '../pages/Product/Product';
 import './Home.css';
-import LifeCycle from '../LifeCrycle/LifeCycle';
-import BlogPost from '../BlogPost/BlogPost';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import LifeCycle from '../pages/LifeCrycle/LifeCycle';
+import BlogPost from '../pages/BlogPost/BlogPost';
+import { BrowserRouter, Route, Link } from 'react-router-dom'; 
+import YoutubePage from '../pages/Youtube/YoutubePage';
 
 class Home extends Component {
     state = {
@@ -73,12 +73,15 @@ class Home extends Component {
                         <Link to="/">BlogPoast</Link>
                         <Link to="/product">Product</Link>
                         <Link to="/lifecycle">LifeCycle</Link>
+                        <Link to="/product">Product</Link>
+                        <Link to="/youtube">Youtube</Link>
                     </div>
                     {/* ketika kita link ke suatu patch maka akan mengubah tampilan  */} 
                     {/* menggunakan exact ketika terdapat garis miring , membuat blogpost hanya akan muncul ketika di patch hanya / , tidak /product   */}
                     <Route path="/" exact component={BlogPost} />
                     <Route path="/product" component={Product} />
                     <Route path="/lifecycle" component={LifeCycle} />
+                    <Route path="/youtube" component={YoutubePage} />
                 </Fragment>
             </BrowserRouter>
         )

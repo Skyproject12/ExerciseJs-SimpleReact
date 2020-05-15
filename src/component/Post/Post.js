@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import '../../container/BlogPost/BlogPost.css'; 
 
 const Post = (props) => {
     return (

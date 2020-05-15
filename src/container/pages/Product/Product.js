@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import './Product.css';
-import CardProduct from '../Cardproduct/CardProduct';
+import CardProduct from './Cardproduct/CardProduct';
 
 class Product extends Component {
 
