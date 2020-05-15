@@ -5,6 +5,7 @@ import LifeCycle from '../pages/LifeCrycle/LifeCycle';
 import BlogPost from '../pages/BlogPost/BlogPost';
 import { BrowserRouter, Route, Link } from 'react-router-dom'; 
 import YoutubePage from '../pages/Youtube/YoutubePage';
+import DetailPost from '../pages/BlogPost/DetailPost/DetailPost';
 
 class Home extends Component {
     state = {
@@ -80,6 +81,7 @@ class Home extends Component {
                     {/* menggunakan exact ketika terdapat garis miring , membuat blogpost hanya akan muncul ketika di patch hanya / , tidak /product   */}
                     <Route path="/" exact component={BlogPost} />
                     <Route path="/product" component={Product} />
+                    <Route path="/detail-post/:id" component={DetailPost} />
                     <Route path="/lifecycle" component={LifeCycle} />
                     <Route path="/youtube" component={YoutubePage} />
                 </Fragment>

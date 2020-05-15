@@ -35,6 +35,9 @@ p.time {
     font-weight: 500;
 }
 
+.content p.title:hover { 
+    cursor: pointer;
+}
 p.title { 
     font-size: 14px; 
     font-weight: 600; 

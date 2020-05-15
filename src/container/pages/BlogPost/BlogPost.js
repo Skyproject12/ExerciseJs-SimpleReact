@@ -123,6 +123,12 @@ class BlogPost extends Component {
         });
     }
 
+    // melakukan perpindahan berdasarkan id post 
+    handleDetail =(id) => {  
+        // melakukan pindah halaman 
+         this.props.history.push(`/detail-post/${id}`)
+    }
+
     render() {
         return (
             <Fragment>
@@ -143,7 +149,7 @@ class BlogPost extends Component {
                 {this.state.post.map(post => {
                     // menampung id berserta remove ketika di kirim props   
                     // menampung remove props untuk di jalankan di sini 
-                    return <Post key={post.id} data={post} remove={this.handleRemove} update={this.handleUpdate} />
+                    return <Post key={post.id} data={post} remove={this.handleRemove} update={this.handleUpdate} goDetail={this.handleDetail} />
                 })}
             </Fragment>
         );
