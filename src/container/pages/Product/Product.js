@@ -1,22 +1,23 @@
 import React, { Component, Fragment } from 'react';
 import './Product.css';
-import CardProduct from './Cardproduct/CardProduct';
+import CardProduct from './Cardproduct/CardProduct'; 
+import {connect} from 'react-redux';
 
 class Product extends Component {
 
     // ketika terdapat perubahan maka di a akan melakukan render 
     // ulang state yang terdapat di dalam component  
     // jika menggunakan variable biasa maka akan error karena variable biasa tidak dapat di definisikan dalam class 
-    state = {
-        order: 4
-    }
+    // state = {
+    //     order: 4
+    // }
 
     // melakukan set ulang counter  berdasarkan value yang diterima dari cardProduct 
-    handleCounterChange = (newValue) => {
-        this.setState({
-            order: newValue
-        })
-    }
+    // handleCounterChange = (newValue) => {
+    //     this.setState({
+    //         order: newValue
+    //     })
+    // }
 
     render() {
         return (
@@ -30,16 +31,26 @@ class Product extends Component {
                     </div>
                     <div className="troley">
                         <img src="https://pngimage.net/wp-content/uploads/2018/06/shopping-trolley-png-1.png" />
-                        <div className="count">{this.state.order}</div>
+                        <div className="count">{this.props.order}</div>
                     </div>
                 </div>
                 {/* melakukan setState dari value berdarakan value cardProduct  */}
                 {/* new value yang di terima akan menginisilalisasi method handleCounterChange  */}
                 {/* melakuakan request props dengan nama onCounterChange dan didalamnya terdapat value new value  */}
-                <CardProduct onCounterChange={(newValue) => this.handleCounterChange(newValue)} />
+                {/* <CardProduct onCounterChange={(newValue) => this.handleCounterChange(newValue)} /> */}
+                <CardProduct />
             </Fragment>
         )
     }
 }
 
-export default Product;
+// mengambil state global lalu di ubah menjadi props 
+const mapStateToProps = (state) =>{  
+    // mengambil totalOrder dari state global 
+    return {  
+        // mengubah total order menjadi order 
+        order: state.totalOrder
+    }
+}
+
+export default connect(mapStateToProps)(Product);

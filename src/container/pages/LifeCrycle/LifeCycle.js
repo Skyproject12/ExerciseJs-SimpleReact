@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import './LifeCycle.css';
+import { connect } from 'react-redux';
 
 // ketika pertama kali di load  
 // 1. constructor  
@@ -87,9 +88,20 @@ class LifeCycle extends Component {
                 <hr />
                 {/* melakukan perubahan ketika di klik  */}
                 <button className="btn" onClick={this.changeCount}>Compoennt Button {this.state.count}</button>
+                <hr />
+                <p>Total Order : {this.props.order}</p>
             </Fragment>
         )
     }
 }
 
-export default LifeCycle;
+// mengambil state global lalu di ubah menjadi props 
+const mapStateToProps = (state) => {
+    // mengambil totalOrder dari state global 
+    return {
+        // mengubah total order menjadi order 
+        order: state.totalOrder
+    }
+}
+
+export default connect(mapStateToProps)(LifeCycle);

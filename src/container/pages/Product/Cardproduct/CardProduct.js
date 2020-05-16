@@ -13,7 +13,8 @@ class CardProduct extends Component {
                     <p className="product-price">Rp.34.000,00</p>  
                     {/* counter dapat di jadikan component lagi agar nanti ketika di butuhkan dapat di panggil di lain operasi  */} 
                     {/* mengirim props dari onclick counter serta data yang value yang di bawa dari counter  */}
-                    <Counter onCounterChange={(value)=> this.props.onCounterChange(value)}/>
+                    {/* <Counter onCounterChange={(value)=> this.props.onCounterChange(value)}/> */}
+                    <Counter />
                 </div>
             </Fragment>
         )

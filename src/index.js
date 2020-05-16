@@ -6,17 +6,8 @@ import Home from './container/Home/Home';
 // import create store 
 import {createStore} from 'redux'; 
 // penyedia store global  
-import {Provider} from 'react-redux';
-
-const globalState = { 
-  totalOrder: 0
-} 
-
-// 1. Reducer 
-// globalState memberi initial state awal 
-const rootReducer = (state = globalState, action) =>{ 
-  return state;
-}
+import {Provider} from 'react-redux'; 
+import rootReducer from './redux/reducer/globalReducer';
 
 // 2. store
 const storeRedux = createStore(rootReducer);
