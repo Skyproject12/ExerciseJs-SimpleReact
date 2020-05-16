@@ -6,38 +6,12 @@ import BlogPost from '../pages/BlogPost/BlogPost';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import YoutubePage from '../pages/Youtube/YoutubePage';
 import DetailPost from '../pages/BlogPost/DetailPost/DetailPost';
-
-// initial root context 
-export const RootContext = createContext();
-const Provider = RootContext.Provider;
+import GlobalProvider from '../../context/context';
 
 class Home extends Component {
     // state = {
     //     showComponent: true
     // }
-
-    // mengeset state menjadi i global   
-    state ={ 
-        totalOrder: 0
-    }
-
-    // menampung function yang akan di buat global 
-    dispatch = (action) => {  
-        // check action yang akan di inisialisasi secara global 
-        if(action.type === 'PLUSS_ORDER'){  
-            return this.setState({ 
-                totalOrder: this.state.totalOrder + 1
-            }) 
-        } 
-        if(action.type === 'MINUS_ORDER'){ 
-            if(this.state.totalOrder<=0){ 
-                return this.setState({totalOrder : 0})
-            } 
-            return this.setState({ 
-                totalOrder: this.state.totalOrder - 1
-            })
-        }
-    }
 
     // melakuakan destroy data setelah 15 detik 
     componentDidMount() {
@@ -48,20 +22,14 @@ class Home extends Component {
         // },15000); 
         return true;
     }
-    render() { 
+    render() {
         return (
-            <BrowserRouter> 
-                {/* membuat context untuk mengatur props  */} 
+            <BrowserRouter>
+                {/* membuat context untuk mengatur props  */}
                 {/* membuat state dan dspatch menjadi global  */}
-                <Provider value={ 
-                    { 
-                        state:this.state, 
-                        dispatch:this.dispatch 
-                    }
-                }>
-                    <div>
-                        {/* when learn props  */}
-                        {/* <p className="title_home">Youtube Bola </p>
+                <div>
+                    {/* when learn props  */}
+                    {/* <p className="title_home">Youtube Bola </p>
                     <p className="desc_home">make all component in here</p>
 
                     <Youtube
@@ -88,42 +56,41 @@ class Home extends Component {
                         title="Bayern Munchen"
                         desc="club liga Jerman terbaik dan terpopuler"
                         image="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/270px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png" /> */}
-                        {/* learn setState      */}
-                        {/* <p className="title_home">Counter</p>
+                    {/* learn setState      */}
+                    {/* <p className="title_home">Counter</p>
                     <p className="desc_home">Count of your order</p>
                     <hr />
                     <Product /> */}
-                        {/* learn lifecrycle   */}
-                        {/* <p className="title_home">LifeCycle</p>
+                    {/* learn lifecrycle   */}
+                    {/* <p className="title_home">LifeCycle</p>
                     <hr />
                     {this.state.showComponent ?
                         <LifeCycle /> : null
                     } */}
-                        {/* learn request api  */}
-                        {/* <p className="title_home">Blog Post</p>
+                    {/* learn request api  */}
+                    {/* <p className="title_home">Blog Post</p>
                     <hr />
                     <BlogPost /> */}
+                </div>
+                <Fragment>
+                    <div className="navigation">
+                        <Link to="/">BlogPoast</Link>
+                        <Link to="/product">Product</Link>
+                        <Link to="/lifecycle">LifeCycle</Link>
+                        <Link to="/product">Product</Link>
+                        <Link to="/youtube">Youtube</Link>
                     </div>
-                    <Fragment>
-                        <div className="navigation">
-                            <Link to="/">BlogPoast</Link>
-                            <Link to="/product">Product</Link>
-                            <Link to="/lifecycle">LifeCycle</Link>
-                            <Link to="/product">Product</Link>
-                            <Link to="/youtube">Youtube</Link>
-                        </div>
-                        {/* ketika kita link ke suatu patch maka akan mengubah tampilan  */}
-                        {/* menggunakan exact ketika terdapat garis miring , membuat blogpost hanya akan muncul ketika di patch hanya / , tidak /product   */}
-                        <Route path="/" exact component={BlogPost} />
-                        <Route path="/product" component={Product} />
-                        <Route path="/detail-post/:id" component={DetailPost} />
-                        <Route path="/lifecycle" component={LifeCycle} />
-                        <Route path="/youtube" component={YoutubePage} />
-                    </Fragment>
-                </Provider>
+                    {/* ketika kita link ke suatu patch maka akan mengubah tampilan  */}
+                    {/* menggunakan exact ketika terdapat garis miring , membuat blogpost hanya akan muncul ketika di patch hanya / , tidak /product   */}
+                    <Route path="/" exact component={BlogPost} />
+                    <Route path="/product" component={Product} />
+                    <Route path="/detail-post/:id" component={DetailPost} />
+                    <Route path="/lifecycle" component={LifeCycle} />
+                    <Route path="/youtube" component={YoutubePage} />
+                </Fragment>
             </BrowserRouter>
         )
     }
 }
 
-export default Home;
+export default GlobalProvider (Home);

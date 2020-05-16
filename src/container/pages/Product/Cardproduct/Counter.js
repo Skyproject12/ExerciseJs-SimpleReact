@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ActionType from '../../../../redux/reducer/globalActionType';
 // melakukan import rootContext yang berasal dari home  
-import { RootContext } from '../../../Home/Home';
+import { RootContext } from '../../../../context/context';
 
 class Counter extends Component {
 
