@@ -21,6 +21,24 @@ class Home extends Component {
         totalOrder: 0
     }
 
+    // menampung function yang akan di buat global 
+    dispatch = (action) => {  
+        // check action yang akan di inisialisasi secara global 
+        if(action.type === 'PLUSS_ORDER'){  
+            return this.setState({ 
+                totalOrder: this.state.totalOrder + 1
+            }) 
+        } 
+        if(action.type === 'MINUS_ORDER'){ 
+            if(this.state.totalOrder<=0){ 
+                return this.setState({totalOrder : 0})
+            } 
+            return this.setState({ 
+                totalOrder: this.state.totalOrder - 1
+            })
+        }
+    }
+
     // melakuakan destroy data setelah 15 detik 
     componentDidMount() {
         // setTimeout(()=>{ 
@@ -34,8 +52,13 @@ class Home extends Component {
         return (
             <BrowserRouter> 
                 {/* membuat context untuk mengatur props  */} 
-                {/* membuat state menjadi global  */}
-                <Provider value={this.state}>
+                {/* membuat state dan dspatch menjadi global  */}
+                <Provider value={ 
+                    { 
+                        state:this.state, 
+                        dispatch:this.dispatch 
+                    }
+                }>
                     <div>
                         {/* when learn props  */}
                         {/* <p className="title_home">Youtube Bola </p>

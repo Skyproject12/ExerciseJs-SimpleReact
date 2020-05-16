@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import './LifeCycle.css';
 import { connect } from 'react-redux';
+// initial context 
+import { RootContext } from '../../Home/Home';
 
 // ketika pertama kali di load  
 // 1. constructor  
@@ -83,14 +85,22 @@ class LifeCycle extends Component {
     render() {
         console.log('render');
         return (
-            <Fragment>
-                <p className="title_home">LifeCycle</p>
-                <hr />
-                {/* melakukan perubahan ketika di klik  */}
-                <button className="btn" onClick={this.changeCount}>Compoennt Button {this.state.count}</button>
-                <hr />
-                <p>Total Order : {0}</p>
-            </Fragment>
+            <RootContext.Consumer>
+                {
+                    value => {
+                        return (
+                            <Fragment>
+                                <p className="title_home">LifeCycle</p>
+                                <hr />
+                                {/* melakukan perubahan ketika di klik  */}
+                                <button className="btn" onClick={this.changeCount}>Compoennt Button {this.state.count}</button>
+                                <hr />
+                                <p>Total Order : {value.state.totalOrder}</p>
+                            </Fragment>
+                        )
+                    }
+                }
+            </RootContext.Consumer>
         )
     }
 }

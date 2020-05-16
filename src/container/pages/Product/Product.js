@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import './Product.css';
-import CardProduct from './Cardproduct/CardProduct'; 
-import {connect} from 'react-redux';
+import CardProduct from './Cardproduct/CardProduct';
+import { connect } from 'react-redux';
+// initial context global
+import { RootContext } from '../../Home/Home';
 
 class Product extends Component {
 
@@ -19,35 +21,44 @@ class Product extends Component {
     //     })
     // }
 
-    render() {
-        return (
-            <Fragment>
-                <p className="title_home">Counter</p>
-                <p className="desc_home">Count of your order</p>
-                <hr />
-                <div className="header">
-                    <div className="logo">
-                        <img src="https://image.flaticon.com/icons/svg/25/25231.svg" />
-                    </div>
-                    <div className="troley">
-                        <img src="https://pngimage.net/wp-content/uploads/2018/06/shopping-trolley-png-1.png" />
-                        <div className="count">{0}</div>
-                    </div>
-                </div>
-                {/* melakukan setState dari value berdarakan value cardProduct  */}
-                {/* new value yang di terima akan menginisilalisasi method handleCounterChange  */}
-                {/* melakuakan request props dengan nama onCounterChange dan didalamnya terdapat value new value  */}
-                {/* <CardProduct onCounterChange={(newValue) => this.handleCounterChange(newValue)} /> */}
-                <CardProduct />
-            </Fragment>
+    render() { 
+        // call state global 
+        return ( 
+            <RootContext.Consumer>
+                {
+                    value => {
+                        return (
+                            <Fragment>
+                                <p className="title_home">Counter</p>
+                                <p className="desc_home">Count of your order</p>
+                                <hr />
+                                <div className="header">
+                                    <div className="logo">
+                                        <img src="https://image.flaticon.com/icons/svg/25/25231.svg" />
+                                    </div>
+                                    <div className="troley">
+                                        <img src="https://pngimage.net/wp-content/uploads/2018/06/shopping-trolley-png-1.png" />
+                                        <div className="count">{value.state.totalOrder}</div>
+                                    </div>
+                                </div>
+                                {/* melakukan setState dari value berdarakan value cardProduct  */}
+                                {/* new value yang di terima akan menginisilalisasi method handleCounterChange  */}
+                                {/* melakuak an request props dengan nama onCounterChange dan didalamnya terdapat value new value  */}
+                                {/* <CardProduct onCounterChange={(newValue) => this.handleCounterChange(newValue)} /> */}
+                                <CardProduct />
+                            </Fragment>
+                        )
+                    }
+                }
+            </RootContext.Consumer>
         )
     }
 }
 
 // mengambil state global lalu di ubah menjadi props 
-const mapStateToProps = (state) =>{  
+const mapStateToProps = (state) => {
     // mengambil totalOrder dari state global 
-    return {  
+    return {
         // mengubah total order menjadi order 
         order: state.totalOrder
     }

@@ -56,10 +56,10 @@ class Counter extends Component {
                             <div className="counter">
                                 <center>
                                     {/* onclick berdasarkan handleminus dari state global  */}
-                                    <button className="minus" onClick={() => null}>-</button>
+                                    <button className="minus" onClick={()=>value.dispatch({type:'MINUS_ORDER'})}>-</button>
                                     {/* context value global  */}
-                                    <input type="text" value={value.totalOrder}></input>
-                                    <button className="plus" onClick={() => null}>+</button>
+                                    <input type="text" value={value.state.totalOrder}></input>
+                                    <button className="plus" onClick={()=>value.dispatch({type:'PLUSS_ORDER'})}>+</button>
                                 </center>
                             </div>
                         )
