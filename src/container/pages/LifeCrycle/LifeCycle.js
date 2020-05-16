@@ -89,7 +89,7 @@ class LifeCycle extends Component {
                 {/* melakukan perubahan ketika di klik  */}
                 <button className="btn" onClick={this.changeCount}>Compoennt Button {this.state.count}</button>
                 <hr />
-                <p>Total Order : {this.props.order}</p>
+                <p>Total Order : {0}</p>
             </Fragment>
         )
     }
@@ -104,4 +104,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(LifeCycle);
+// export default connect(mapStateToProps)(LifeCycle);
+export default LifeCycle;

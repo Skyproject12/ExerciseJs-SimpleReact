@@ -31,7 +31,7 @@ class Product extends Component {
                     </div>
                     <div className="troley">
                         <img src="https://pngimage.net/wp-content/uploads/2018/06/shopping-trolley-png-1.png" />
-                        <div className="count">{this.props.order}</div>
+                        <div className="count">{0}</div>
                     </div>
                 </div>
                 {/* melakukan setState dari value berdarakan value cardProduct  */}
@@ -53,4 +53,5 @@ const mapStateToProps = (state) =>{
     }
 }
 
-export default connect(mapStateToProps)(Product);
+// export default connect(mapStateToProps)(Product);
+export default Product;
