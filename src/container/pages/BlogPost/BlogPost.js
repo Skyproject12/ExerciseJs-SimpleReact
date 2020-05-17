@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import './BlogPost.css';
 import Post from '../../../component/Post/Post';
 import axios from 'axios';
+import API from '../../../service';
 
 class BlogPost extends Component {
 
@@ -14,18 +15,32 @@ class BlogPost extends Component {
             body: '',
             userId: 1
         },
-        isUpdate: false
+        isUpdate: false, 
+        // menampung list comment 
+        comments: []
     }
 
     // melakukan get api 
     getPostApi = () => {
-        // melakukan pengurutan data berdasarkan id secara terbalik  
-        axios.get('http://localhost:3004/posts?_sort=id&_order=desc')
-            .then((res) => {
-                this.setState({
-                    post: res.data
-                })
+        // melakukan pengambilan data secara global 
+        API.getNewsBlog().then(res => {
+            // mengambil res request 
+            this.setState({
+                post: res
             })
+        })
+        // melakukan pengurutan data berdasarkan id secara terbalik  
+        // axios.get('http://localhost:3004/posts?_sort=id&_order=desc')
+        //     .then((res) => {
+        //         this.setState({
+        //             post: res.data
+        //         })
+        //     }) 
+        API.getComment().then(comment =>{ 
+            this.setState({ 
+                comments: comment
+            })
+        })
     }
 
     // melakukan handle ketika form berubah  
@@ -124,9 +139,9 @@ class BlogPost extends Component {
     }
 
     // melakukan perpindahan berdasarkan id post 
-    handleDetail =(id) => {  
+    handleDetail = (id) => {
         // melakukan pindah halaman 
-         this.props.history.push(`/detail-post/${id}`)
+        this.props.history.push(`/detail-post/${id}`)
     }
 
     render() {
@@ -144,7 +159,12 @@ class BlogPost extends Component {
                     {/* memberi value default untuk melakuakan update  */}
                     <textarea value={this.state.formBlogPost.body} name="body" id="body" color="30" rows="10" placeholder="add content" onChange={this.handleFormChange}></textarea>
                     <button className="btn-submit" onClick={this.handleSubmit}>Simpan</button>
-                </div>
+                </div> 
+                {/* melakukan map untuk mengulang data comment dari api  dan membentuk array baru  */}
+                {this.state.comments.map(comment => {
+                    return <p>{comment.name}</p>
+                })
+                }
                 {/* map berfungsi menggulang data sebanyak jumlah data lalu mereturn object post  */}
                 {this.state.post.map(post => {
                     // menampung id berserta remove ketika di kirim props   
