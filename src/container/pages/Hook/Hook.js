@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import './Hook.css'; 
 
 // class Hook extends Component {
@@ -25,7 +25,17 @@ import './Hook.css';
 
 const Hook = () => {
     // pada hook ini count merupakan state dan setCount merupakan function yang mengupdate state 
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(0); 
+
+    useEffect(()=>{  
+        // melakukan update ketika page telah di tampilkan 
+        document.title=`Title : ${count}`; 
+        // ketika page di hapus maka akan membuat title menjadi react hello   
+        return () => { 
+            document.title='React hello world'
+        }
+    })
+
     return (
         <div className="p-hook">
             <p>Nilai Saya saat ini adalah : {count}</p> 
