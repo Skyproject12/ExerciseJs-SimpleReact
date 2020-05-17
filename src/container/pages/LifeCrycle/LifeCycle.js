@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import './LifeCycle.css';
-import { connect } from 'react-redux';
-// initial context 
-import { RootContext } from '../../Home/Home';
+import { connect } from 'react-redux'; 
+// import global consumer  
+import { GlobalConsumer } from '../../../context/context';
 
 // ketika pertama kali di load  
 // 1. constructor  
@@ -85,22 +85,14 @@ class LifeCycle extends Component {
     render() {
         console.log('render');
         return (
-            <RootContext.Consumer>
-                {
-                    value => {
-                        return (
-                            <Fragment>
-                                <p className="title_home">LifeCycle</p>
-                                <hr />
-                                {/* melakukan perubahan ketika di klik  */}
-                                <button className="btn" onClick={this.changeCount}>Compoennt Button {this.state.count}</button>
-                                <hr />
-                                <p>Total Order : {value.state.totalOrder}</p>
-                            </Fragment>
-                        )
-                    }
-                }
-            </RootContext.Consumer>
+            <Fragment>
+                <p className="title_home">LifeCycle</p>
+                <hr />
+                {/* melakukan perubahan ketika di klik  */}
+                <button className="btn" onClick={this.changeCount}>Compoennt Button {this.state.count}</button>
+                <hr />
+                <p>Total Order : {this.props.state.totalOrder}</p>
+            </Fragment>
         )
     }
 }
@@ -114,5 +106,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-// export default connect(mapStateToProps)(LifeCycle);
-export default LifeCycle;
+// export default connect(mapStateToProps)(LifeCycle); 
+// hight order component 
+export default GlobalConsumer(LifeCycle);

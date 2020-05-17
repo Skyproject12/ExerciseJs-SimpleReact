@@ -93,4 +93,6 @@ class Home extends Component {
     }
 }
 
+// melakuakan hight order component sehingga data global provider dapat di jalankan di home  
+// home di jadikan sebagai children 
 export default GlobalProvider (Home);

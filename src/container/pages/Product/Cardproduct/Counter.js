@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 // connect merupakan suatu hoc yang akan di panggil di export 
 import { connect } from 'react-redux';
 import ActionType from '../../../../redux/reducer/globalActionType';
-// melakukan import rootContext yang berasal dari home  
-import { RootContext } from '../../../../context/context';
+// jika suatu class atau function tidak export default 
+import {GlobalConsumer } from '../../../../context/context';
 
 class Counter extends Component {
 
@@ -44,28 +44,18 @@ class Counter extends Component {
 
     // }
 
-    render() {
+    render() { 
+        console.log(this)
         return (
-            // menginisialisasi context agar dapat memanggil props global 
-            <RootContext.Consumer>
-                {/* memanggil value dari context global  */}
-                {
-                    value => { 
-                        {/* membuat counter menjadi component tersendiri   */ }
-                        return (
-                            <div className="counter">
-                                <center>
-                                    {/* onclick berdasarkan handleminus dari state global  */}
-                                    <button className="minus" onClick={()=>value.dispatch({type:'MINUS_ORDER'})}>-</button>
-                                    {/* context value global  */}
-                                    <input type="text" value={value.state.totalOrder}></input>
-                                    <button className="plus" onClick={()=>value.dispatch({type:'PLUSS_ORDER'})}>+</button>
-                                </center>
-                            </div>
-                        )
-                    }
-                }
-            </RootContext.Consumer>
+            <div className="counter">
+                <center>
+                    {/* onclick berdasarkan handleminus dari state global  */} 
+                    <button className="minus" onClick={() => this.props.dispatch({ type: 'MINUS_ORDER' })}>-</button>
+                    {/* context value global  */}
+                    <input type="text" value={this.props.state.totalOrder}></input>
+                    <button className="plus" onClick={() => this.props.dispatch({ type: 'PLUSS_ORDER' })}>+</button>
+                </center>
+            </div>
         )
     }
 }
@@ -94,4 +84,4 @@ class Counter extends Component {
 // connect component dengan redux
 // maka props global yang di inisilisasi akan di panggil 
 // export default connect(mapStateToProps, mapDispatchToProps)(Counter);
-export default Counter;
+export default GlobalConsumer(Counter);
