@@ -86,8 +86,9 @@ class BlogPost extends Component {
     }
 
     // melakukan post ke api 
-    postDataToApi = () => {
-        axios.post(`http://localhost:3004/posts/`, this.state.formBlogPost).then((result) => {
+    postDataToApi = () => { 
+        // membuat fungsi post menjdi global 
+        API.postNewsBlog(this.state.formBlogPost).then((res)=>{ 
             // ketika sudah berhasil melakukan insert maka render get api kembali 
             this.getPostApi();
             // menghapus form ketika sudah update 
@@ -99,7 +100,20 @@ class BlogPost extends Component {
                     userId: 1
                 },
             })
-        });
+        })
+        // axios.post(`http://localhost:3004/posts/`, this.state.formBlogPost).then((result) => {
+        //     // ketika sudah berhasil melakukan insert maka render get api kembali 
+        //     this.getPostApi();
+        //     // menghapus form ketika sudah update 
+        //     this.setState({
+        //         formBlogPost: {
+        //             id: 1,
+        //             title: '',
+        //             body: '',
+        //             userId: 1
+        //         },
+        //     })
+        // });
     }
 
     // melakukan remove handle 
@@ -111,7 +125,6 @@ class BlogPost extends Component {
 
     putDataToApi = () => {
         axios.put(`http://localhost:3004/posts/${this.state.formBlogPost.id}`, this.state.formBlogPost).then((res) => {
-            console.log(res);
             this.getPostApi();
             // ketika sudah selesai mengupdate maka ubah status menjadi false 
             // lalu set form kembali kosong
@@ -161,10 +174,10 @@ class BlogPost extends Component {
                     <button className="btn-submit" onClick={this.handleSubmit}>Simpan</button>
                 </div> 
                 {/* melakukan map untuk mengulang data comment dari api  dan membentuk array baru  */}
-                {this.state.comments.map(comment => {
+                {/* {this.state.comments.map(comment => {
                     return <p>{comment.name}</p>
                 })
-                }
+                } */}
                 {/* map berfungsi menggulang data sebanyak jumlah data lalu mereturn object post  */}
                 {this.state.post.map(post => {
                     // menampung id berserta remove ketika di kirim props   
