@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import YoutubePage from '../pages/Youtube/YoutubePage';
 import DetailPost from '../pages/BlogPost/DetailPost/DetailPost';
 import GlobalProvider from '../../context/context';
+import Hook from '../pages/Hook/Hook';
 
 class Home extends Component {
     // state = {
@@ -79,6 +80,7 @@ class Home extends Component {
                         <Link to="/lifecycle">LifeCycle</Link>
                         <Link to="/product">Product</Link>
                         <Link to="/youtube">Youtube</Link>
+                        <Link to="/hook">Hook</Link>
                     </div>
                     {/* ketika kita link ke suatu patch maka akan mengubah tampilan  */}
                     {/* menggunakan exact ketika terdapat garis miring , membuat blogpost hanya akan muncul ketika di patch hanya / , tidak /product   */}
@@ -87,6 +89,7 @@ class Home extends Component {
                     <Route path="/detail-post/:id" component={DetailPost} />
                     <Route path="/lifecycle" component={LifeCycle} />
                     <Route path="/youtube" component={YoutubePage} />
+                    <Route path="/hook" component={Hook} />
                 </Fragment>
             </BrowserRouter>
         )
