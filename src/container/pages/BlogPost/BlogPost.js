@@ -117,14 +117,17 @@ class BlogPost extends Component {
     }
 
     // melakukan remove handle 
-    handleRemove = (data) => {
-        axios.delete(`http://localhost:3004/posts/${data}`).then((res) => {
+    handleRemove = (data) => { 
+        API.deleteNewsBlog(data).then((res)=>{ 
             this.getPostApi();
         })
+        // axios.delete(`http://localhost:3004/posts/${data}`).then((res) => {
+        //     this.getPostApi();
+        // })
     }
 
-    putDataToApi = () => {
-        axios.put(`http://localhost:3004/posts/${this.state.formBlogPost.id}`, this.state.formBlogPost).then((res) => {
+    putDataToApi = () => { 
+        API.putNewsBlog(this.state.formBlogPost, this.state.formBlogPost.id).then((res)=>{ 
             this.getPostApi();
             // ketika sudah selesai mengupdate maka ubah status menjadi false 
             // lalu set form kembali kosong
@@ -138,6 +141,20 @@ class BlogPost extends Component {
                 },
             })
         })
+        // axios.put(`http://localhost:3004/posts/${this.state.formBlogPost.id}`, this.state.formBlogPost).then((res) => {
+        //     this.getPostApi();
+        //     // ketika sudah selesai mengupdate maka ubah status menjadi false 
+        //     // lalu set form kembali kosong
+        //     this.setState({
+        //         isUpdate: false,
+        //         formBlogPost: {
+        //             id: 1,
+        //             title: '',
+        //             body: '',
+        //             userId: 1
+        //         },
+        //     })
+        // })
     }
 
     // melakukan udpate data  
